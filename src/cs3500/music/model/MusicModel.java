@@ -20,7 +20,7 @@ public class MusicModel implements MusicOperations<Note[][]> {
    *                          to be modeled.
    */
   public MusicModel(int maxPieceLength, int tempo) {
-    piece = new Note[120][maxPieceLength];
+    piece = new Note[128][maxPieceLength];
     MAX_LENGTH = maxPieceLength;
     for (int i = 0; i < 120; i++) {
       fill(piece[i],null);
@@ -30,7 +30,7 @@ public class MusicModel implements MusicOperations<Note[][]> {
 
   @Override
   public void addNote(int value, int start, int duration) {
-    if (value < 0 || value > 119) {
+    if (value < 0 || value > 127) {
       throw new IllegalArgumentException("Invalid note value");
     }
     if (start < 0) {
@@ -61,7 +61,7 @@ public class MusicModel implements MusicOperations<Note[][]> {
   @Override
   public void removeNote(int value, int start) {
     if (value < 0
-        || value > 120) {
+        || value > 128) {
       throw new IllegalArgumentException("Invalid note value");
     }
     if (start >= MAX_LENGTH
@@ -84,7 +84,7 @@ public class MusicModel implements MusicOperations<Note[][]> {
   public void combineSimultaeniously(MusicOperations<Note[][]> other) {
     Note[][] addition = other.getContents();
 
-    for (int i = 0; i < 120; i++) {
+    for (int i = 0; i < 128; i++) {
       for (int j = 0; j < addition[i].length; j++) {
         if (addition[i][j] != null
             && addition[i][j].isOnset()
@@ -101,7 +101,7 @@ public class MusicModel implements MusicOperations<Note[][]> {
 
     Note[][] addition = other.getContents();
 
-    for (int i = 0; i < 120; i++) {
+    for (int i = 0; i < 128; i++) {
       for (int j = 0; j < addition[i].length; j++) {
         if (addition[i][j] != null
             && addition[i][j].isOnset()
@@ -115,7 +115,7 @@ public class MusicModel implements MusicOperations<Note[][]> {
   @Override
   public Note[][] getContents() {
     Note[][] copy = new Note[120][MAX_LENGTH];
-    for (int i = 0; i < 120; i++) {
+    for (int i = 0; i < 128; i++) {
       copy[i] = piece[i].clone();
     }
     return copy;
@@ -186,7 +186,7 @@ public class MusicModel implements MusicOperations<Note[][]> {
   private int pieceLength() {
     int max = 0;
 
-    for (int i = 0; i < 120; i++) {
+    for (int i = 0; i < 128; i++) {
       for (int j = 0; j < MAX_LENGTH; j++) {
         if (piece[i][j] != null
             && (j + 1) > max) {
@@ -204,9 +204,9 @@ public class MusicModel implements MusicOperations<Note[][]> {
    * @return the minimum note value in the piece.
    */
  public int minNote() {
-    int min = 120;
+    int min = 128;
 
-    for (int i = 0; i < 120; i++) {
+    for (int i = 0; i < 128; i++) {
       for (int j = 0; j < MAX_LENGTH; j++) {
         if (piece[i][j] != null
             && i < min) {
@@ -226,7 +226,7 @@ public class MusicModel implements MusicOperations<Note[][]> {
   public int maxNote() {
     int max = 0;
 
-    for (int i = 0; i < 120; i++) {
+    for (int i = 0; i < 128; i++) {
       for (int j = 0; j < MAX_LENGTH; j++) {
         if (piece[i][j] != null
             && i > max) {

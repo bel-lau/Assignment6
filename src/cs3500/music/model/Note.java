@@ -7,7 +7,7 @@ package cs3500.music.model;
  * tone.
  *
  * <p>Notes' numerical value represents the musical scale, 0 representing C1
- * all the way to 119 representing B10.</p>
+ * all the way to 127 representing B10.</p>
  */
 public class Note {
   private final int value;
@@ -23,7 +23,7 @@ public class Note {
    *                   onset of a tone.
    */
   public Note(int value, int duration, boolean onset) {
-    if (value > 119 || value < 0) {
+    if (value > 127 || value < 0) {
       throw new IllegalArgumentException("Note value is invalid.");
     }
     this.value = value;
@@ -38,7 +38,7 @@ public class Note {
    * @param duration  duration of the whole tone
    */
   public Note(int value, int duration) {
-    if (value > 119 || value < 0) {
+    if (value > 127 || value < 0) {
       throw new IllegalArgumentException("Note value is invalid.");
     }
     if (duration <= 0) {
@@ -103,7 +103,7 @@ public class Note {
       default: letter = "B";
     }
 
-    octave = Integer.toString((value / 12) + 1);
+    octave = Integer.toString((value / 12) - 1);
 
     return letter + octave;
   }
